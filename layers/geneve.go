@@ -116,6 +116,11 @@ func (gn *Geneve) NextLayerType() gopacket.LayerType {
 	return gn.Protocol.LayerType()
 }
 
+// CanDecode returns the set of layer types that this DecodingLayer can decode.
+func (gn *Geneve) CanDecode() gopacket.LayerClass {
+	return LayerTypeGeneve
+}
+
 func decodeGeneve(data []byte, p gopacket.PacketBuilder) error {
 	gn := &Geneve{}
 	return decodingLayerDecoder(gn, data, p)
